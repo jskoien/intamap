@@ -13,15 +13,14 @@ spatialPredict.block = function(object,...) {
 # - for easier access
   params = getIntamapParams(object$params, ...)
   blockWhat = object$blockWhat
-  dots = list(...)
   block = params$block
 
-  params = getIntamapParams(object$params, ...)
-  nmax = object$params$nmax
-  nmin = object$params$nmin
-  omax = object$params$omax
-  beta = object$params$beta
-  maxdist = object$params$maxdist
+  nmax = params$nmax
+  nmin = params$nmin
+  omax = params$omax
+  beta = params$beta
+  maxdist = params$maxdist
+  debug.level = params$debug.level
   
   if (is.null(maxdist)) maxdist = Inf
   observations = object$observations
@@ -106,7 +105,7 @@ spatialPredict.block = function(object,...) {
     object$pointPredictions = pointObject$predictions
     object$pointLocations = pointObject$predictionLocations
     object = spatialAggregate(object, SpP)
-    if (object$params$debug.level < 2) object$pointPredictions = 
+    if (debug.level < 2) object$pointPredictions = 
                   "pointPredictions deleted from object, debug.level < 2"
   }
   return(object)
